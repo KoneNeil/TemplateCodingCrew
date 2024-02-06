@@ -23,7 +23,7 @@ const SneakersList = () => {
       <div className="mb-4">
         <h1 className="text-2xl font-semibold mt-4">Air Jordan 1 Retro High OG "Sky J Mauve"</h1>
         <p className="mt-2">
-        La Air Jordan 1 Retro High OG "Sky J Mauve" incarne l'élégance audacieuse et l'héritage emblématique de la ligne Jordan. Cette chaussure de basket-ball emblématique marie parfaitement le style contemporain et l'hommage à l'héritage historique de la marque. Arborant une palette de couleurs captivante, le Mauve céleste, qui évoque les nuances du crépuscule, enveloppe la tige en cuir premium, conférant une esthétique raffinée et moderne.        </p>
+        La Air Jordan 1 Retro High OG "Sky J Mauve" incarne l'élégance audacieuse et l'héritage emblématique de la ligne Jordan. Cette chaussure de basket-ball emblématique marie parfaitement le style contemporain et l'hommage à l'héritage historique de la marque.</p>
       </div>
       <button
         className={`bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 transition-all ${showDetails ? 'bg-gray-500' : ''}`}
