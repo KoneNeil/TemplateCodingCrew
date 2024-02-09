@@ -5,10 +5,10 @@ import Link from "next/link";
 import Navbar from "../navbar";
 
 
-export default async function Page({ params }: { params: { id : string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
 
-  
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { id : string } }) {
     .select("*")
     .eq('typeid', params.id);
 
-    console.log(models.data);
+  console.log(models.data);
 
   if (!models.data) {
     return <div>Model {params.id} does not exist</div>;
@@ -41,8 +41,8 @@ export default async function Page({ params }: { params: { id : string } }) {
             {models.data.map((model: any) => (<Link key={model.id} href="/">
               <li>
                 <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[250px]">
-                {model.name}
-                <img className="w-full h-full object-cover" src={model.imageUrl} alt={model.name} /> 
+                  {model.name}
+                  <img className="w-full h-full object-cover" src={model.imageUrl} alt={model.name} />
                 </div>
               </li>
             </Link>)

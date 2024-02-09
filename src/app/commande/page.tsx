@@ -253,7 +253,7 @@ export default function App() {
               required
               id={postalcodeId}
               value={postalcode}
-              placeholder="5 Rue des Lilas"
+              placeholder="75200"
               onChange={(event) => {
                 update({ postalcode: event.target.value })
               }}
