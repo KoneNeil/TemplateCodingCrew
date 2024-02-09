@@ -37,7 +37,7 @@ export default async function Home() {
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
         <ul className="flex gap-4">
           {products.data?.map((product) => (
-            <Link href={`/${product.id}`} key={product.id}>
+            <Link href={`/${product.typeid}`} key={product.id}>
               <li>
                 <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[250px]">
                   <h1>{product.types.name}</h1>

@@ -4,9 +4,11 @@ import React from "react";
 import Link from "next/link";
 import Navbar from "../navbar";
 
-export default async function Page({ params }: { params: { id: string } }) {
+
+export default async function Page({ params }: { params: { id : string } }) {
   const cookieStore = cookies();
 
+  
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -19,16 +21,15 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
   );
 
-  const product = await supabase
-    .from("products")
-    .select("*, productImages(*), models(name)")
-    .eq('id', params.id)
-    .maybeSingle();
+  const models = await supabase
+    .from("models")
+    .select("*")
+    .eq('typeid', params.id);
 
-  console.log(JSON.stringify(product, null, 2));
+    console.log(models.data);
 
-  if (!product.data) {
-    return <div>Product {params.id} does not exist</div>;
+  if (!models.data) {
+    return <div>Model {params.id} does not exist</div>;
   }
 
   return (
@@ -40,18 +41,15 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
         <div className="flex min-h-screen flex-col items-center justify-between p-24">
           <ul className="flex gap-4">
-            <Link href="/jordan1lucky">
+            {models.data.map((model: any) => (<Link key={model.id} href="/">
               <li>
                 <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[250px]">
-                  <h1>{product.data.models.name}</h1>
-                  <img
-                    className="w-full h-full object-cover"
-                    alt={`Shoe image for product id ${product.data.id}`}
-                    src={product.data.productImages[0].url}
-                  />
+                {model.name}
+                <img src={model.imageUrl} alt={model.name} /> 
                 </div>
               </li>
-            </Link>
+            </Link>)
+            )}
           </ul>
         </div>
       </div>
