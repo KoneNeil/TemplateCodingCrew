@@ -36,16 +36,13 @@ export default async function Page({ params }: { params: { id : string } }) {
     <main>
       <Navbar />
       <div className="relative h-45 w-90">
-        <div className="absolute top-0 right-0 h-45 w-45">
-          <div className="flex w-max items-end gap-4"></div>
-        </div>
         <div className="flex min-h-screen flex-col items-center justify-between p-24">
           <ul className="flex gap-4">
             {models.data.map((model: any) => (<Link key={model.id} href="/">
               <li>
                 <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[250px]">
                 {model.name}
-                <img src={model.imageUrl} alt={model.name} /> 
+                <img className="w-full h-full object-cover" src={model.imageUrl} alt={model.name} /> 
                 </div>
               </li>
             </Link>)
