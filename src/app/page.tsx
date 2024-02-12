@@ -1,8 +1,8 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
-import Image from "next/image";
 import { cookies } from "next/headers";
 import Navbar from "./navbar";
 import Link from 'next/link';
+import { MoveUpRightButton } from './moveupright';
 
 
 export default async function Home() {
@@ -19,36 +19,31 @@ export default async function Home() {
     }
   );
 
-
   const products = await supabase
     .from("products")
     .select("*, productImages(*), types(name)")
-    .range(0, 2)
+    .range(0, 2);
 
   return (
-    <main>
+    <main className="bg-gray-100 min-h-screen">
       <Navbar />
-      <div className="relative h-45 w-90">
-        <div className="absolute top-43 right-0 h-45 w-45">
-          <div className="flex w-max items-end gap-4">
-          </div>
-        </div>
-      </div>
-      <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <ul className="flex gap-4">
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-wrap gap-8">
           {products.data?.map((product) => (
             <Link href={`/${product.typeid}`} key={product.id}>
-              <li>
-                <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[250px]">
-                  <h1>{product.types.name}</h1>
-                  <img className="w-full h-full object-cover"
+              <div className="rounded-lg overflow-hidden bg-white shadow-md p-4 transition-transform transform hover:scale-105 text-center">
+                <h1 className="text-xl font-semibold mb-4">{product.types.name}</h1>
+                <div className="flex justify-center items-center h-72">
+                  <img
+                    className="object-cover max-w-full max-h-full"
                     alt={`Shoe image for product id ${product.id}`}
-                    src={product.productImages[0]?.url} />
+                    src={product.productImages[0]?.url}
+                  />
                 </div>
-              </li>
+              </div>
             </Link>
           ))}
-        </ul>
+        </div>
       </div>
     </main>
   );

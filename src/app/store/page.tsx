@@ -26,21 +26,29 @@ export default async function Store() {
   console.log(models.data);
 
   return (
-    <main>
+    <main className="bg-gray-100 min-h-screen">
       <Navbar />
-      <h1 className="text-3xl font-semibold mb-8 justify-center flex flex-wrap mt-8">Products</h1>
-      <ul className="flex flex-wrap gap-4 justify-center mt-8">
+      <h1 className="text-5xl mb-8 text-center text-gray-800 font-sans mt-4">All Products</h1>
+      <div className="flex flex-wrap justify-center items-center mt-4">
         {models?.data?.map((model: any) => (
           <Link key={model.id} href="/jordan1sky">
-            <li>
-              <div className="rounded-lg overflow-hidden bg-red-200 w-[250px] h-[300px] p-4">
-                <div className="mb-3 text-center">{model.name}</div>
-                <img className="w-full h-5/6 object-cover mb-4" src={model.imageUrl} alt={model.name} />
+            <div className="rounded-lg overflow-hidden bg-white shadow-md p-4 text-center m-4 transition-transform transform hover:scale-105">
+              <div className="mb-3">
+                <p className="text-lg font-semibold">{model.name}</p>
+                <p className="flex items-center justify-center">
+                  <span className="text-xl font-bold text-blue-500">${model.price}</span>
+                  {model.oldprice && (
+                    <span className="text-sm text-gray-500 ml-2 line-through">
+                      ${model.oldprice}
+                    </span>
+                  )}
+                </p>
               </div>
-            </li>
+              <img className="w-full h-40 object-cover mb-4" src={model.imageUrl} alt={model.name} />
+            </div>
           </Link>
         ))}
-      </ul>
+      </div>
     </main>
   );
 }
