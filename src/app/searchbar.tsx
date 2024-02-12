@@ -28,7 +28,7 @@ const Data = async (value: React.SetStateAction<any>) => {
 
 
   return (
-    <div className='input-wrapper'>
+    <div className='input-wrapper mt-24'>
     <FaSearch id="search-icon"/>
     <input 
     placeholder='Chercher un produit' 

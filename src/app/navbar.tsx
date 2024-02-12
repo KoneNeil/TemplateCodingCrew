@@ -16,7 +16,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="border-b shadow-md py-4">
+    <nav className="border-b shadow-md py-4 fixed w-full top-0 bg-white z-50">
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         <div>
           <Menu>

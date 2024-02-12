@@ -28,7 +28,7 @@ export default async function Store() {
   return (
     <main className="bg-gray-100 min-h-screen">
       <Navbar />
-      <h1 className="text-5xl mb-8 text-center text-gray-800 font-sans mt-4">All Products</h1>
+      <h1 className="text-5xl mb-8 text-center text-gray-800 font-sans mt-14">All Products</h1>
       <div className="flex flex-wrap justify-center items-center mt-4">
         {models?.data?.map((model: any) => (
           <Link key={model.id} href="/jordan1sky">
