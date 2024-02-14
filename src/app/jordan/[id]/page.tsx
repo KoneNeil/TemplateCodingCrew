@@ -2,11 +2,11 @@
 import { useCookies } from "react-cookie";
 import React, { useState, useEffect } from 'react';
 import { createServerClient } from "@supabase/ssr";
-import Navbar from "../navbar";
+import Navbar from "../../navbar";
 
 export default function Page({ params }: { params: { id: string } }) {
   const [cookies, setCookie] = useCookies(); 
-  const targetId = "2";
+  const targetId = params.id;
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

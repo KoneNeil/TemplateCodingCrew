@@ -31,7 +31,7 @@ export default async function Store() {
       <h1 className="text-5xl mb-8 text-center text-gray-800 font-sans mt-14">All Products</h1>
       <div className="flex flex-wrap justify-center items-center mt-4">
         {models?.data?.map((model: any) => (
-          <Link key={model.id} href="/jordan1sky">
+          <Link key={model.id} href={`/jordan/${model.id}`}>
             <div className="rounded-lg overflow-hidden bg-white shadow-md p-4 text-center m-4 transition-transform transform hover:scale-105">
               <div className="mb-3">
                 <p className="text-lg font-semibold">{model.name}</p>
