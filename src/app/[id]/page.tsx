@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import React from "react";
 import Link from "next/link";
 import Navbar from "../navbar";
+import skyComponent from "../skyComponent";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
