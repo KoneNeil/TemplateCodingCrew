@@ -3,7 +3,7 @@ import './ResultsSearch.css';
 import Link from 'next/link';
 import { createClient } from "@supabase/supabase-js";
 
-export default function ResultsSearch({ params }: { params: { id: string; result: any; } }) {
+export default function ResultsSearch({ params }: { params: { id: number; result: any; } }) {
   const [models, setModels] = useState<any[]>([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function ResultsSearch({ params }: { params: { id: string; result
     <div className='search-result'>
       {models.map((model: any) => (
         <Link href={`/jordan/${model.id}`} key={model.id}>
-          {params.result.name}
+          {model.name}
         </Link>
       ))}
     </div>

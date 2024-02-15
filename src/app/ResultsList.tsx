@@ -9,7 +9,7 @@ export const ResultsList: React.FC<ResultsListProps> = ({ results }) => {
   return (
     <div className="results-list">
       {results.map((result, id) => {
-        return <div><ResultsSearch params={{ id: id.toString(), result: result }} key={id}/></div>;
+        return <div><ResultsSearch params={{ id: id, result: result }} key={result.id}/></div>;
       })}
     </div>
   );
