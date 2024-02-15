@@ -17,8 +17,6 @@ export const SearchBar = ({ setResults }: { setResults: any }) => {
       .select('*')
       .filter('name', 'ilike', `%${value}%`)
 
-      console.log("bonjour", data)
-
     if (error) console.error(error)
     else setResults(data)
   }

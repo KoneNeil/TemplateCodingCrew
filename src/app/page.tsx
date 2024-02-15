@@ -2,7 +2,6 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import Navbar from "./navbar";
 import Link from 'next/link';
-import { MoveUpRightButton } from './moveupright';
 
 
 export default async function Home() {

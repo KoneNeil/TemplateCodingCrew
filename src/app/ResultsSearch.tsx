@@ -20,15 +20,10 @@ export default function ResultsSearch({ params }: { params: { id: number; result
         .limit(1)
         .single() 
 
-        console.log(params.id, data)
-
       if (error) {
         console.error("Error fetching models:", error);
         return;
       }
-
-
-      console.log("data", data);
 
       setModel(data || {});
     };

@@ -1,8 +1,7 @@
 "use client"
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { SearchBar } from "../searchbar"
 import { ResultsList } from "../ResultsList"
-import Link from 'next/link';
 import Navbar from '../navbar';
 
 function Search() {

@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import "./global.css";
 import { SearchBar } from "./searchbar"
 import { ResultsList } from "./ResultsList"
