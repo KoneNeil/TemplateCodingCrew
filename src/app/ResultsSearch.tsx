@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { createClient } from "@supabase/supabase-js";
 
 export default function ResultsSearch({ params }: { params: { id: number; result: any; } }) {
-  const [models, setModels] = useState<any[]>([]);
+  const [model, setModel] = useState<any>({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,14 +16,21 @@ export default function ResultsSearch({ params }: { params: { id: number; result
       const { data, error } = await supabase
         .from("models")
         .select("*")
-        .eq('id', params.id);
+        .eq('id', params.id)
+        .limit(1)
+        .single() 
+
+        console.log(params.id, data)
 
       if (error) {
         console.error("Error fetching models:", error);
         return;
       }
 
-      setModels(data || []);
+
+      console.log("data", data);
+
+      setModel(data || {});
     };
 
     fetchData();
@@ -31,11 +38,9 @@ export default function ResultsSearch({ params }: { params: { id: number; result
 
   return (
     <div className='search-result'>
-      {models.map((model: any) => (
-        <Link href={`/jordan/${model.id}`} key={model.id}>
+        <Link href={`/jordan/${model.id}`}>
           {model.name}
         </Link>
-      ))}
     </div>
   );
 }

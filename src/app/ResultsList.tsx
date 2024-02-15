@@ -8,8 +8,8 @@ interface ResultsListProps {
 export const ResultsList: React.FC<ResultsListProps> = ({ results }) => {
   return (
     <div className="results-list">
-      {results.map((result, id) => {
-        return <div><ResultsSearch params={{ id: id, result: result }} key={result.id}/></div>;
+      {results.map((result) => {
+        return <div><ResultsSearch params={{ id : result.id, result: result }} key={result.id}/></div>;
       })}
     </div>
   );
