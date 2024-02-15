@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="flex justify-center items-center h-screen">
         <div className="flex flex-wrap gap-8">
           {models.data.map((model: any) => (
-            <Link key={model.id} href="/">
+            <Link key={model.id} href={`/jordan/${model.id}`}>
               <div className="rounded-lg overflow-hidden bg-white shadow-md p-4 transition-transform transform hover:scale-105 text-center">
                 <h1 className="text-xl font-semibold mb-4">{model.name}</h1>
                 <div className="flex justify-center items-center h-72">
