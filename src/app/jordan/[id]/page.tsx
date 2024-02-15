@@ -20,24 +20,45 @@ export default function Page({ params }: { params: { id: string } }) {
     }
   );
 
-  const [models, setModels] = useState<any[]>([]);
+  const [model, setModel] = useState<any | null>(null);
+  const [sizes, setSizes] = useState<any[]>([]);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchModels = async () => {
-      const { data, error } = await supabase
+    const fetchData = async () => {
+      const { data: modelData, error: modelError } = await supabase
         .from("models")
         .select("*")
-        .eq('id', targetId);
+        .eq('id', targetId)
+        .single();
 
-      if (data) {
-        setModels(data);
+      if (modelData) {
+        setModel(modelData);
       } else {
-        console.error("Error fetching models:", error);
+        console.error("Error fetching model:", modelError);
+      }
+
+      const { data: sizesData, error: sizesError } = await supabase
+        .from("sizes")
+        .select("size");
+
+      if (sizesData) {
+        setSizes(sizesData);
+      } else {
+        console.error("Error fetching sizes:", sizesError);
       }
     };
 
-    fetchModels();
+    fetchData();
   }, [targetId]);
+
+  const addToCart = () => {
+    console.log("Item added to cart:", selectedSize);
+  };
+
+  const handleSizeClick = (size: string) => {
+    setSelectedSize(size === selectedSize ? null : size);
+  };
 
   const SneakersList = () => {
     const [showDetails, setShowDetails] = useState(false);
@@ -45,13 +66,31 @@ export default function Page({ params }: { params: { id: string } }) {
     return (
       <main>
         <Navbar />
-        <div className="container mx-auto p-4 mt-16">
-          {models.map((model: any) => (
-            <div key={model.id} className="flex bg-white rounded-md shadow-md mb-8 overflow-hidden">
-              <img src={model.imageUrl} alt={model.name} className="w-1/3 h-auto rounded-l-md" />
-              <div className="flex-1 p-4">
+        <div className="container mx-auto p-4 mt-16 relative">
+          {model && (
+            <div className="flex bg-white rounded-md shadow-md mb-8 overflow-hidden">
+              <img src={model.imageUrl} alt={model.name} className="w-1/3 h-auto rounded-l-md object-cover" />
+              <div className="flex-1 p-4 relative">
                 <h1 className="text-2xl font-semibold mb-2">{model.name}</h1>
                 <p className="text-gray-600 mb-4">{model.description}</p>
+                <div className="flex items-center mb-4">
+                  <p className="mr-2"><strong>Tailles :</strong></p>
+                  <div className="flex space-x-2">
+                    {sizes.map((size: any) => (
+                      <span
+                        key={size.id}
+                        onClick={() => handleSizeClick(size.size)}
+                        className={`cursor-pointer px-3 py-1 rounded-md ${
+                          selectedSize === size.size
+                            ? 'bg-black text-white'
+                            : 'bg-gray-200 text-gray-700'
+                        }`}
+                      >
+                        {size.size}
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <button
                   className={`bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 transition-all ${showDetails ? 'bg-gray-500' : ''}`}
                   onClick={() => setShowDetails(!showDetails)}
@@ -61,16 +100,21 @@ export default function Page({ params }: { params: { id: string } }) {
                 {showDetails && (
                   <div className="mt-4">
                     <h2 className="text-lg font-semibold">{model.marque}</h2>
-                    <p></p>
                     <p><strong>Type de produit :</strong> {model.typeproduit}</p>
                     <p><strong>Couleur : </strong>{model.couleur}</p>
                     <p><strong>Matériaux : </strong>{model.materiaux}</p>
                     <p><strong>Référence : </strong>{model.reference}</p>
                   </div>
                 )}
+                <button
+                  className="bg-black text-white px-4 py-2 rounded-md absolute bottom-4 right-4"
+                  onClick={addToCart}
+                >
+                  Ajouter au panier
+                </button>
               </div>
             </div>
-          ))}
+          )}
         </div>
       </main>
     );
