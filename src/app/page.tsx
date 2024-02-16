@@ -4,6 +4,7 @@ import Navbar from "./navbar";
 import Link from 'next/link';
 
 
+
 export default async function Home() {
   const cookieStore = cookies();
   const supabase = createServerClient(

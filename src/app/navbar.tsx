@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const menuItems = [
     { value: "search", label: "Search", href: "/search" },
-    { value: "cart", label: "Cart", href: "/commande" },
+    { value: "cart", label: "Cart", href: "/cart" },
     { value: "store", label: "Store", href: "/store" },
     { value: "home", label: "Home", href: "/" },
   ];
@@ -52,14 +52,16 @@ const Navbar = () => {
                   </Menu.Items>
                 </Transition>
               </>
-            )}
+            )}    
           </Menu>
         </div>
         <Link href="/">ESHOP</Link>
         <div className="flex items-center">
-          <Link href="/commande">
+          <Link href="/cart">
             <div className="flex items-center">
+
               <ShoppingCart className="mr-5" />
+
             </div>
           </Link>
           <Link href="/search">

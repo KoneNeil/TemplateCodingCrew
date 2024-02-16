@@ -5,7 +5,7 @@ import { createServerClient } from "@supabase/ssr";
 import Navbar from "../../navbar";
 
 export default function Page({ params }: { params: { id: string } }) {
-  const [cookies, setCookie] = useCookies();
+  const [cookies] = useCookies();
   const targetId = params.id;
 
   const supabase = createServerClient(
@@ -52,16 +52,16 @@ export default function Page({ params }: { params: { id: string } }) {
     fetchData();
   }, [targetId]);
 
-  const addToCart = () => {
-    console.log("Item added to cart:", selectedSize);
-  };
-
   const handleSizeClick = (size: string) => {
     setSelectedSize(size === selectedSize ? null : size);
   };
 
   const SneakersList = () => {
     const [showDetails, setShowDetails] = useState(false);
+
+    function addToCart(model: any): void {
+      throw new Error("Function not implemented.");
+    }
 
     return (
       <main>
@@ -80,11 +80,10 @@ export default function Page({ params }: { params: { id: string } }) {
                       <span
                         key={size.id}
                         onClick={() => handleSizeClick(size.size)}
-                        className={`cursor-pointer px-3 py-1 rounded-md ${
-                          selectedSize === size.size
+                        className={`cursor-pointer px-3 py-1 rounded-md ${selectedSize === size.size
                             ? 'bg-black text-white'
                             : 'bg-gray-200 text-gray-700'
-                        }`}
+                          }`}
                       >
                         {size.size}
                       </span>
@@ -108,9 +107,9 @@ export default function Page({ params }: { params: { id: string } }) {
                 )}
                 <button
                   className="bg-black text-white px-4 py-2 rounded-md absolute bottom-4 right-4"
-                  onClick={addToCart}
+                  onClick={() => addToCart(model)} 
                 >
-                  Ajouter au panier
+                    Ajouter au panier
                 </button>
               </div>
             </div>
